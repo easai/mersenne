@@ -1,12 +1,12 @@
 # Mersenne Number
 
 Create .jar file as follows.
-<code>
+<pre>
 > mvn install
-</code>
+</pre>
 
 The .jar file is under /target.
-<code>
+<pre>
 > cd target
 > java -jar mersenne-1.0-SNAPSHOT.jar
-</code>
+</pre>
