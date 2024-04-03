@@ -72,7 +72,7 @@ public class Mersenne {
         BigInteger[] f = new BigInteger[p + 1];
         f[0] = new BigInteger("4");
         for (int i = 1; i <= p; i++) {
-            f[i] = f[i - 1].multiply(f[i - 1]).subtract(new BigInteger("2"));
+            f[i] = f[i - 1].multiply(f[i - 1]).subtract(new BigInteger("2")).mod(mp);
         }
 
         // Check if the result is congruent to 0 modulo the Mersenne number.
@@ -81,7 +81,7 @@ public class Mersenne {
 
     public static void main(String[] args) {
         try {
-            System.out.println("Is 2^31 - 1 prime? " + testLucasLehmer(7));
+            System.out.println("Is 2^31 - 1 prime? " + testLucasLehmer(31));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
