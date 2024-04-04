@@ -8,6 +8,26 @@ import java.util.List;
  * A class that checks if a number is a perfect number.
  */
 public class PerfectNumber {
+
+    /**
+     * Calculates the root of a given number using the Heron's method.
+     * 
+     * @param x the number to calculate the root for
+     * @return the root
+     */
+    public static int sqrt(int x) {
+        double y = 1;
+        double prev = 0;
+        while (1 <= Math.abs(y - prev)) {
+            prev = y;
+            y = 1.0 / 2 * (prev + x / prev);
+        }
+        while ((y + 1) * (y + 1) < x) {
+            y++;
+        }
+        return (int) y;
+    }
+
     /**
      * Calculates the factors of a given number.
      *
@@ -15,23 +35,10 @@ public class PerfectNumber {
      * @return a list of the factors
      */
     public static List<Integer> factor(int x) {
-        int n = (int) Math.floor(Math.sqrt(x)) + 1;
-        int[] res = new int[n];
-        res[1] = -1;
-        for (int i = 0; i < n; i++) {
-            if (res[i] == 0 && 1 < i) {
-                if ((x % i) != 0) {
-                    for (int j = i; j < n; j += i) {
-                        res[j] = 1;
-                    }
-                } else {
-                    res[i] = -1;
-                }
-            }
-        }
+        int n = sqrt(x);
         List<Integer> set = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            if (res[i] == -1) {
+        for (int i = 1; i <= n; i++) {
+            if (x % i == 0) {
                 set.add(i);
                 if (i != x / i) {
                     set.add(x / i);
@@ -75,7 +82,7 @@ public class PerfectNumber {
      * @param args command line arguments
      */
     public static void main(String[] args) {
-        int num = 6;
+        int num = 28;
         if (PerfectNumber.isPerfect(num)) {
             System.out.println(num + " is a perfect number.");
         } else {
